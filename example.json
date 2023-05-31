@@ -1,0 +1,35 @@
+{
+  "name": "misha",
+  "pseudo": "mish",
+  "surname": "toto",
+  "email": "mich@gmail.com",
+  "gender": "male",
+  "accountType": "Admin",
+  "wardrobes":[
+  {
+    "id": 2,
+    "name": "Dressing de misha",
+    "items":
+    [ {
+      "id": 2,
+      "name": "pantalon",
+      "label":"mon dressing",
+      "type": "Jean",
+      "season": "Eté",
+      "color": "blue",
+      "size": "XS",
+      "fit": "Serré"
+    }
+   ]
+  }
+  ],
+  "events":[
+  {
+    "id": 5,
+    "dateStart": "2023-05-15",
+    "dateEnd":"2023-05-15",
+    "description": "La fête de la musique",
+    "outfit": null
+  }
+  ]
+}
