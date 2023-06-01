@@ -1,4 +1,5 @@
 package com.example.vestiback.model;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -25,30 +26,54 @@ public class User {
         @Id
         private String id;
         private String name;
-        private List<Item> items;
+        private List<Top> tops;
+        private List<Bottom> bottoms;
 
-        @Getter
-        @Setter
-        public static class Item {
-            @Id
-            private String id;
-            private String name;
-            private String label;
-            private String season;
-            private String type;
-            private String color;
-            private String size;
-            private String fit;
+            @Data
+            public static class Top{
+                @Id
+                private String id;
+                private String name;
+                private String label;
+                private String season;
+                private String type;
+                private String color;
+                private String size;
+                private boolean favorite;
+                private String fit;
+
+                }
+                @Data
+                public static class Bottom{
+                    @Id
+                    private String id;
+                    private String name;
+                    private String label;
+                    private String season;
+                    private String type;
+                    private String color;
+                    private String size;
+                    private boolean favorite;
+                    private String fit;
+                }
             }
-        }
-    @Getter
-    @Setter
-    public static class Event{
+
+
+    @Data
+    public static class Event {
         @Id
         private String id;
         private Date dateStart;
         private Date dateEnd;
         private String description;
-        private List<Wardrobe.Item> outfit;
+/*        private List<Outfit> outfits;
+
+        @Data
+        public static class Outfit {
+            @Id
+            private String id;
+
+
+        }*/
     }
 }

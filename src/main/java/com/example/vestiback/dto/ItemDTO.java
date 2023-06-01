@@ -1,14 +1,12 @@
 package com.example.vestiback.dto;
+import com.example.vestiback.model.User;
 import lombok.Data;
+
+import java.util.List;
+
 @Data
 public class ItemDTO {
     private String id;
-    private String name;
-    private String label;
-    private String type;
-    private String season;
-    private String color;
-    private String size;
-    private String fit;
-    private boolean favorite;
+    private List<User.Wardrobe.Top> tops;
+    private List<User.Wardrobe.Bottom> bottoms;
 }

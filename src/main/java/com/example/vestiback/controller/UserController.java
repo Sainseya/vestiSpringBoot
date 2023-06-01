@@ -1,6 +1,7 @@
 package com.example.vestiback.controller;
 import com.example.vestiback.dto.*;
 import com.example.vestiback.model.User;
+import com.example.vestiback.service.OutfitService;
 import com.example.vestiback.service.UserService;
 import com.fasterxml.jackson.databind.*;
 import org.springframework.http.ResponseEntity;
@@ -12,35 +13,46 @@ import java.util.List;
 @RequestMapping("/vesti")
 public class UserController {
     private final UserService userService;
-    private final ObjectMapper mapper;
+    private final OutfitService outfitService;
 
-    private UserController(UserService userService, ObjectMapper mapper){
+    private UserController(UserService userService, ObjectMapper mapper, OutfitService outfitService){
         this.userService = userService;
-        this.mapper = mapper;
+        this.outfitService = outfitService;
     }
+
+
     @GetMapping("")
-    public List<User> findAll(){
+    public List<User> findAll(){ //Get all user.
         return userService.findAll();
     }
-
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //Find a user by his id.
     public UserFullDTO getUserById(@PathVariable String id){
-        return userService.getUserById(id);
+        return userService.getUserFUllById(id);
     }
 
-    @GetMapping("/{userId}/{itemId}")
-    public ItemDTO getItemById(@PathVariable String userId, @PathVariable String itemId){
-        return userService.getItemById(userId,itemId);
+    @GetMapping("/user/{userId}") //Find a short inforamtion about a user.
+    public UserShortDTO getUserShortById(@PathVariable String userId){
+        return userService.getUserShortById(userId);
     }
 
-    @GetMapping("{userId}/{wardrobeId}")
+    @GetMapping("{userId}/wardrobe/{wardrobeId}")
     public wardrobeDTO getDressingById(@PathVariable String userId, @PathVariable String wardrobeId){
-        return userService.getDressingById(userId, wardrobeId);
+        return userService.getWardrobeById(userId, wardrobeId);
     }
 
-    @GetMapping("/{userId}/{eventId}")
+    @GetMapping("/{userId}/event/{eventId}")
     public EventDTO getEventById(@PathVariable String userId, @PathVariable String eventId){
         return userService.getEventById(userId,eventId);
+    }
+
+/*    @GetMapping("/{userId}/outfit/{outfitId}")
+    public OutfitDTO getOutfitById(@PathVariable String userId, @PathVariable String outfitId){
+        return userService.getOutfitById(userId,outfitId);
+    }*/
+
+    @PostMapping("")
+    public User save(@RequestBody User user){
+        return userService.save(user);
     }
 
     @PutMapping("/{id}")
@@ -48,19 +60,21 @@ public class UserController {
         return userService.update(user,id);
     }
 
-    @PostMapping("")
-    public User save(@RequestBody User user){
-        return userService.save(user);
-    }
-
     @DeleteMapping("/all")
-    public void deleteUserAll(){
+    public ResponseEntity<String> deleteUserAll(){
         userService.deleteAll();
+        return ResponseEntity.ok("You delete all user");
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable String id){
         userService.deleteById(id);
-        return ResponseEntity.ok("No Content");
+        return ResponseEntity.ok("You delete " +"{id}"+ "user");
     }
+
+    @GetMapping("{userId}/wardrobe/{wardrobeId}/top") //Find a user by his id.
+    public TopDTO getTop(@PathVariable String userId,@PathVariable String wardrobeId){
+        return outfitService.getTop(userId, wardrobeId);
+    }
+
 }

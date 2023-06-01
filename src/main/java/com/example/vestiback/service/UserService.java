@@ -1,9 +1,6 @@
 package com.example.vestiback.service;
 
-import com.example.vestiback.dto.wardrobeDTO;
-import com.example.vestiback.dto.EventDTO;
-import com.example.vestiback.dto.ItemDTO;
-import com.example.vestiback.dto.UserFullDTO;
+import com.example.vestiback.dto.*;
 import com.example.vestiback.model.User;
 import com.example.vestiback.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -22,7 +19,13 @@ public class UserService {
     }
 
     public List<User> findAll(){
-        return userRepository.findAll();
+
+        if (userRepository.findAll().isEmpty()){
+            throw new RuntimeException("The table is empty");
+        }
+        else {
+            return userRepository.findAll();
+        }
     }
 
     public void deleteAll(){
@@ -53,34 +56,20 @@ public class UserService {
             return userRepository.save(existingUser);
         }}
 
-
     /**DTO Configuration**/
 
-    public UserFullDTO getUserById(String id){
+    public UserFullDTO getUserFUllById(String id){
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         return modelMapper.map(user, UserFullDTO.class);
     }
 
-    public ItemDTO getItemById(String userId, String itemId ) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        List<User.Wardrobe> wardrobes = user.getWardrobes();
-
-        // Parcourir tous les wardrobe de l'utilisateur pour trouver l'Item correspondant
-        for (User.Wardrobe wardrobe : wardrobes) {
-            List<User.Wardrobe.Item> items = wardrobe.getItems();
-
-            for (User.Wardrobe.Item item : items) {
-                if (item.getId().equals(itemId)) {
-                    return modelMapper.map(item, ItemDTO.class);
-                }
-            }
-        }
-        throw new RuntimeException("Item not found");
+    public UserShortDTO getUserShortById(String id){
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return modelMapper.map(user, UserShortDTO.class);
     }
 
-    public wardrobeDTO getDressingById(String userId, String wardrobeId){
+
+    public wardrobeDTO getWardrobeById(String userId, String wardrobeId){
 
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         List<User.Wardrobe> wardrobes = user.getWardrobes();
@@ -103,4 +92,28 @@ public class UserService {
             }
         }
         throw new RuntimeException("Event not found");
-    }}
+    }
+
+/*    public OutfitDTO getOutfitById(String userId, String outfitId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        List<User.Event> events = user.getEvents();
+
+        for (User.Event event: events) {
+            List<User.Event.Outfit> outfits = event.getOutfit();
+
+            for (User.Event.Outfit outfit : outfits){
+                if (outfit.getId().equals(outfitId)){
+
+                    outfit.setName(outfit.getName());
+
+                    return modelMapper.map(outfit, OutfitDTO.class);
+                }
+            }
+        }
+        throw new RuntimeException("Outfit not found");
+    }*/
+
+    /**Top and Bottom DTO*/
+
+
+}

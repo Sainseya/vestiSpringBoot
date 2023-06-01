@@ -1,35 +1,92 @@
 {
-  "name": "misha",
-  "pseudo": "mish",
-  "surname": "toto",
-  "email": "mich@gmail.com",
+  "name": "malumba",
+  "pseudo": "sainseya",
+  "surname": "nseya",
+  "email": "nseya@gmail.com",
   "gender": "male",
-  "accountType": "Admin",
+  "accountType": "user",
   "wardrobes":[
   {
-    "id": 2,
-    "name": "Dressing de misha",
-    "items":
-    [ {
-      "id": 2,
-      "name": "pantalon",
-      "label":"mon dressing",
-      "type": "Jean",
-      "season": "Eté",
-      "color": "blue",
-      "size": "XS",
-      "fit": "Serré"
+    "id": 1,
+    "name": "Dressing de sainseya",
+      "tops" :[{
+        "id":7,
+        "name": "nike t-shirt",
+        "label":"my fav tshirt",
+        "type": "top",
+        "season": "summer",
+        "color": "black",
+        "size": "XXL",
+        "favorte":false,
+        "fit": "oversize"
+      },
+        {
+          "id":8,
+          "name": "addidas t-shirt",
+          "label":"my fav tshirt",
+          "type": "top",
+          "season": "winter",
+          "color": "black",
+          "size": "XXL",
+          "favorte":false,
+          "fit": "oversize"
+        },
+        {
+          "id":9,
+          "name": "Gucci t-shirt",
+          "label":"my fav tshirt",
+          "type": "top",
+          "season": "summer",
+          "color": "Yellow",
+          "size": "XXXXXXXXXL",
+          "favorte":false,
+          "fit": "oversizzzzze"
+        }
+      ],
+
+      "bottoms": [{
+        "id": 2,
+        "name": "pantalon",
+        "label":"mon dressing",
+        "type": "bottom",
+        "season": "summer",
+        "color": "blue",
+        "size": "XS",
+        "favorte":false,
+        "fit": "skinny"
+      },
+        {
+          "id": 3,
+          "name": "pantalon en jeans",
+          "label":"mon pantalon fav",
+          "type": "bottom",
+          "season": "wntere",
+          "color": "green",
+          "size": "XL",
+          "favorte":false,
+          "fit": "skinny"
+        },
+        {
+          "id": 6,
+          "name": "pantalon",
+          "label":"Black jeans ",
+          "type": "bottom",
+          "season": "summer",
+          "color": "black",
+          "size": "XXL",
+          "favorte":false,
+          "fit": "Oversize"
+        }
+      ]
     }
-   ]
-  }
   ],
+
   "events":[
   {
     "id": 5,
     "dateStart": "2023-05-15",
     "dateEnd":"2023-05-15",
-    "description": "La fête de la musique",
-    "outfit": null
+    "description": "La fête de la musique"
   }
   ]
 }
