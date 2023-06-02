@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 @Data
 public class OutfitDTO {
 
-/*    @Id
+    @Id
     private String id;
     private String name;
     private String label;
@@ -14,7 +14,6 @@ public class OutfitDTO {
     private String color;
     private String size;
     private String fit;
-    private boolean favorite;*/
-
+    private boolean favorite;
 
 }

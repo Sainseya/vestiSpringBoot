@@ -12,6 +12,6 @@ public class UserFullDTO {
     private String mail;
     private String gender;
     private String accountType;
-    private List<wardrobeDTO> wardrobes;
+    private List<WardrobeDTO> wardrobes;
     private List<EventDTO> events;
 }

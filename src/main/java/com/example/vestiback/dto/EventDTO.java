@@ -10,5 +10,4 @@ public class EventDTO {
     private Date beginDate;
     private Date endDate;
     private String description;
-    private List<ItemDTO> outfit;
 }

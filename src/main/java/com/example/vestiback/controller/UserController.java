@@ -36,13 +36,13 @@ public class UserController {
     }
 
     @GetMapping("{userId}/wardrobe/{wardrobeId}")
-    public wardrobeDTO getDressingById(@PathVariable String userId, @PathVariable String wardrobeId){
+    public WardrobeDTO getDressingById(@PathVariable String userId, @PathVariable String wardrobeId){
         return userService.getWardrobeById(userId, wardrobeId);
     }
 
-    @GetMapping("/{userId}/event/{eventId}")
-    public EventDTO getEventById(@PathVariable String userId, @PathVariable String eventId){
-        return userService.getEventById(userId,eventId);
+    @GetMapping("/{userId}/event")
+    public List<EventDTO> getEventById(@PathVariable String userId){
+        return userService.getEventById(userId);
     }
 
 /*    @GetMapping("/{userId}/outfit/{outfitId}")
@@ -72,9 +72,18 @@ public class UserController {
         return ResponseEntity.ok("You delete " +"{id}"+ "user");
     }
 
-    @GetMapping("{userId}/wardrobe/{wardrobeId}/top") //Find a user by his id.
-    public TopDTO getTop(@PathVariable String userId,@PathVariable String wardrobeId){
-        return outfitService.getTop(userId, wardrobeId);
+    @GetMapping("{userId}/wardrobe/{wardrobeId}/tops") //Find all user tops.
+    public List<TopDTO> getTops(@PathVariable String userId,@PathVariable String wardrobeId){
+        return outfitService.getTops(userId, wardrobeId);
+    }
+    @GetMapping("{userId}/wardrobe/{wardrobeId}/bottoms") //Find all users bottoms.
+    public List<BottomDTO> getBottoms(@PathVariable String userId,@PathVariable String wardrobeId){
+        return outfitService.getBottoms(userId, wardrobeId);
+    }
+
+    @GetMapping("{userId}/outfit") //Find outfit.
+    public List<Object> getOutfit(@PathVariable String userId){
+        return outfitService.getOutfit(userId);
     }
 
 }

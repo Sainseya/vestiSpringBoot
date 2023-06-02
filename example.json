@@ -86,7 +86,18 @@
     "id": 5,
     "dateStart": "2023-05-15",
     "dateEnd":"2023-05-15",
-    "description": "La fête de la musique"
+    "description": "La fête de la musique",
+    "outfits": [{
+      "id": null,
+      "name": null,
+      "label":null,
+      "type": null,
+      "season": null,
+      "color": null,
+      "size": null,
+      "favorte":null,
+      "fit": null
+    }]
   }
   ]
 }

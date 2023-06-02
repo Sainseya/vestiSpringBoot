@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -69,29 +70,26 @@ public class UserService {
     }
 
 
-    public wardrobeDTO getWardrobeById(String userId, String wardrobeId){
+    public WardrobeDTO getWardrobeById(String userId, String wardrobeId){
 
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         List<User.Wardrobe> wardrobes = user.getWardrobes();
 
         for ( User.Wardrobe wardrobe: wardrobes) {
             if (wardrobe.getId().equals(wardrobeId)){
-                return modelMapper.map(wardrobe, wardrobeDTO.class);
+                return modelMapper.map(wardrobe, WardrobeDTO.class);
             }
         }
         throw new RuntimeException("Wardrobe not found");
     }
 
-    public EventDTO getEventById(String userId, String eventId){
+    public List<EventDTO> getEventById(String userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         List<User.Event> events = user.getEvents();
 
-        for (User.Event event: events) {
-            if (event.getId().equals(eventId)){
-                return modelMapper.map(event, EventDTO.class);
-            }
-        }
-        throw new RuntimeException("Event not found");
+        return  events.stream()
+                .map(e -> modelMapper.map(e,EventDTO.class))
+                .collect(Collectors.toList());
     }
 
 /*    public OutfitDTO getOutfitById(String userId, String outfitId){

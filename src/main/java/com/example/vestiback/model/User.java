@@ -58,7 +58,6 @@ public class User {
                 }
             }
 
-
     @Data
     public static class Event {
         @Id
@@ -66,14 +65,20 @@ public class User {
         private Date dateStart;
         private Date dateEnd;
         private String description;
-/*        private List<Outfit> outfits;
+        private List<Outfit> outfits;
 
         @Data
         public static class Outfit {
             @Id
             private String id;
-
-
-        }*/
+            private String name;
+            private String label;
+            private String season;
+            private String type;
+            private String color;
+            private String size;
+            private boolean favorite;
+            private String fit;
+        }
     }
 }
