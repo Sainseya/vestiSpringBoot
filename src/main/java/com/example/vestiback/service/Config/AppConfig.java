@@ -1,4 +1,4 @@
-package com.example.vestiback.service;
+package com.example.vestiback.service.Config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

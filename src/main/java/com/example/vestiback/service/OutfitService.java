@@ -1,14 +1,13 @@
 package com.example.vestiback.service;
 
-import com.example.vestiback.dto.BottomDTO;
-import com.example.vestiback.dto.OutfitDTO;
-import com.example.vestiback.dto.TopDTO;
+import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
+import com.example.vestiback.model.Wardrobe;
 import com.example.vestiback.repository.UserRepository;
+import com.example.vestiback.service.Exception.Error;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,67 +16,93 @@ public class OutfitService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-
-
     public OutfitService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<TopDTO> getTops(String userId, String wardrobeId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        List<User.Wardrobe> wardrobes = user.getWardrobes();
+    public List<Item> getTops(String userId, String wardrobeName) throws Error {
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        List<Wardrobe> wardrobes = user.getWardrobes();
 
-        for (User.Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getId().equals(wardrobeId)) {
-                List<User.Wardrobe.Top> tops = wardrobe.getTops();
-                return tops.stream()
-                        .map(e -> modelMapper.map(e, TopDTO.class))
+        for (Wardrobe wardrobe : wardrobes) {
+            if (wardrobe.getName().equals(wardrobeName)) {
+                List<Item> tops = wardrobe.getItems();
+                return tops.stream().filter(e -> e.getType().equals("top"))
                         .collect(Collectors.toList());
             }
         }
-        throw new RuntimeException("Tops not found");
+        throw new Error("Tops not found");
     }
 
-    /**Cette foction recupère tous les élements contenus dans le bottoms*/
-    public List<BottomDTO> getBottoms(String userId, String wardrobeId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        List<User.Wardrobe> wardrobes = user.getWardrobes();
+    public List<Item> getBottoms(String userId, String wardrobeName) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        List<Wardrobe> wardrobes = user.getWardrobes();
 
-        for (User.Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getId().equals(wardrobeId)) {
-                List<User.Wardrobe.Bottom> bottoms = wardrobe.getBottoms();
-                return bottoms.stream()
-                        .map(e -> modelMapper.map(e, BottomDTO.class))
+        for (Wardrobe wardrobe : wardrobes) {
+            if (wardrobe.getName().equals(wardrobeName)) {
+                List<Item> bottoms = wardrobe.getItems();
+                return bottoms.stream().filter(e -> e.getType().equals("bottom"))
                         .collect(Collectors.toList());
             }
         }
-        throw new RuntimeException("Bottoms not found");
+        throw new Error("Bottoms not found");
     }
 
-    /**
-     * @param userId
-     * @return
+    /*
+      <p>
+      * La méthode getOutfit prend en paramètre userId, l'ID de l'utilisateur, et retourne une liste d'objets représentant les tenues de l'utilisateur.
+      *
+      * La méthode commence par récupérer l'utilisateur correspondant à l'ID fourni en utilisant le UserRepository.
+      Si l'utilisateur n'est pas trouvé, une exception Error est levée avec le message "User not found".
+      *
+      * Ensuite, la méthode récupère la liste des garde-robes (wardrobes) de l'utilisateur.
+      *
+      * Un nouvel ArrayList appelé outfits est créé pour stocker les tenues.
+      *
+      * La méthode parcourt chaque garde-robe dans la liste des garde-robes de l'utilisateur en utilisant une boucle for-each.
+      *
+      * À l'intérieur de la boucle, les bas (bottoms) et les hauts (tops) de chaque garde-robe sont récupérés à l'aide des méthodes getBottoms() et getTops() respectivement.
+      *
+      * Pour chaque liste de bas et de hauts, un Stream est créé à l'aide de la méthode stream().
+      *
+      * Ensuite, la méthode map() est utilisée pour mapper chaque élément de la liste d'objets d'origine à un objet OutfitDTO à l'aide de modelMapper.map().
+      Cela permet de convertir les objets de type User.Wardrobe.Bottom et User.Wardrobe.Top en objets de type OutfitDTO.
+      *
+      * La méthode toList() est appelée pour convertir le Stream en une liste d'objets OutfitDTO.
+      *
+      * Enfin, la méthode findAny() est utilisée pour obtenir un élément de la liste résultante.
+      Cet élément est ajouté à la liste des tenues (outfits) à l'aide de la méthode add().
+      *
+      * Une fois que toutes les garde-robes ont été traitées, la méthode retourne la liste des tenues (outfits).
+      *
+      * Si aucune tenue n'est trouvée (c'est-à-dire si la liste des garde-robes est vide), une exception
+      <p/>
+
+      @param userId : String
+     * @return une liste des tenues de l'utilisateurs généré aléatoirement.
+     * @author Nseya Malumba
      */
-    public List<Object> getOutfit(String userId){
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+/*    public List<Object> getOutfit(String userId) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         List<User.Wardrobe> wardrobes = user.getWardrobes();
         List<Object> outfits = new ArrayList<>();
 
         for (User.Wardrobe wardrobe: wardrobes) {
-            List<User.Wardrobe.Bottom> bottoms = wardrobe.getBottoms();
-            List<User.Wardrobe.Top> tops = wardrobe.getTops();
+            List<Item> bottoms = wardrobe.getBottoms();
+            List<Item> tops = wardrobe.getTops();
 
             outfits.add(bottoms.stream()
-                    .map(e -> modelMapper.map(e, OutfitDTO.class))
-                    .collect(Collectors.toList()));
+                    .map(e -> modelMapper.map(e, OutfitDTO.class)).toList().stream().findAny());
             outfits.add(tops.stream()
                     .map(e -> modelMapper.map(e, OutfitDTO.class))
-                    .collect(Collectors.toList()));
-            return outfits;
+                    .toList().stream().findAny());
+
+            List<User.Wardrobe> outfitList = outfits.stream().map(o -> modelMapper.map(o, User.Wardrobe.class)).toList();
+            return Collections.singletonList(outfitList);
         }
-        throw new RuntimeException("Outfit not not found");
-    }
+        throw new Error("Outfit not found");
+    }*/
 
 
 

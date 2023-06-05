@@ -1,103 +1,125 @@
 {
-  "name": "malumba",
-  "pseudo": "sainseya",
-  "surname": "nseya",
-  "email": "nseya@gmail.com",
+  "name": "John",
+  "surname": "Doe",
+  "pseudo": "johndoe",
+  "email": "john.doe@example.com",
   "gender": "male",
-  "accountType": "user",
-  "wardrobes":[
-  {
-    "id": 1,
-    "name": "Dressing de sainseya",
-      "tops" :[{
-        "id":7,
-        "name": "nike t-shirt",
-        "label":"my fav tshirt",
-        "type": "top",
-        "season": "summer",
-        "color": "black",
-        "size": "XXL",
-        "favorte":false,
-        "fit": "oversize"
-      },
+  "accountType": "standard",
+  "wardrobes": [
+    {
+      "name": "Summer Wardrobe",
+      "items": [
         {
-          "id":8,
-          "name": "addidas t-shirt",
-          "label":"my fav tshirt",
+          "id": "1",
+          "name": "T-Shirt",
+          "label": null,
+          "season":"summer",
           "type": "top",
-          "season": "winter",
-          "color": "black",
-          "size": "XXL",
-          "favorte":false,
-          "fit": "oversize"
-        },
-        {
-          "id":9,
-          "name": "Gucci t-shirt",
-          "label":"my fav tshirt",
-          "type": "top",
-          "season": "summer",
-          "color": "Yellow",
-          "size": "XXXXXXXXXL",
-          "favorte":false,
-          "fit": "oversizzzzze"
-        }
-      ],
-
-      "bottoms": [{
-        "id": 2,
-        "name": "pantalon",
-        "label":"mon dressing",
-        "type": "bottom",
-        "season": "summer",
-        "color": "blue",
-        "size": "XS",
-        "favorte":false,
-        "fit": "skinny"
-      },
-        {
-          "id": 3,
-          "name": "pantalon en jeans",
-          "label":"mon pantalon fav",
-          "type": "bottom",
-          "season": "wntere",
-          "color": "green",
           "size": "XL",
-          "favorte":false,
-          "fit": "skinny"
+          "favorite": true,
+          "linkImage": null,
+          "fit": null,
+          "color": "blue"
         },
         {
-          "id": 6,
-          "name": "pantalon",
-          "label":"Black jeans ",
+          "id": "2",
+          "name": "Shorts",
+          "label": "",
+          "season":"summer",
           "type": "bottom",
-          "season": "summer",
-          "color": "black",
           "size": "XXL",
-          "favorte":false,
-          "fit": "Oversize"
+          "favorite": false,
+          "linkImage": null,
+          "fit": "",
+          "color": "white"
+        },
+        {
+          "id": "3",
+          "name": "Sandals",
+          "label": "",
+          "season":"summer",
+          "type": "shoes",
+          "size": "45",
+          "favorite": false,
+          "linkImage": null ,
+          "fit": null,
+          "color": "brown"
+        },
+        {
+          "id": "4",
+          "name": "My T-Shirt",
+          "label": null,
+          "season":"winter",
+          "type": "top",
+          "size": "L",
+          "favorite": true,
+          "linkImage": null,
+          "fit": null,
+          "color": "black"
+        },
+        {
+          "id": "5",
+          "name": "Shorts",
+          "label": "",
+          "season":"summer",
+          "type": "bottom",
+          "size": "M",
+          "favorite": false,
+          "linkImage": null,
+          "fit": "",
+          "color": "white"
+        },
+        {
+          "id": "6",
+          "name": "Hermès",
+          "label": "",
+          "season":"summer",
+          "type": "shoes",
+          "size": "38",
+          "favorite": false,
+          "linkImage": null ,
+          "fit": null,
+          "color": "green"
         }
       ]
     }
   ],
-
-  "events":[
-  {
-    "id": 5,
-    "dateStart": "2023-05-15",
-    "dateEnd":"2023-05-15",
-    "description": "La fête de la musique",
-    "outfits": [{
-      "id": null,
-      "name": null,
-      "label":null,
-      "type": null,
-      "season": null,
-      "color": null,
-      "size": null,
-      "favorte":null,
-      "fit": null
-    }]
-  }
+  "events": [
+    {
+      "id": "7",
+      "dateStart": "2023-06-01",
+      "dateEnd": "2023-06-03",
+      "description": "Summer Music Festival",
+      "outfit": [{
+        "id": null,
+        "name": null,
+        "label": null,
+        "season": null,
+        "type": null,
+        "size": null,
+        "favorite": false,
+        "linkImage":null,
+        "fit": null,
+        "color": null
+      }]
+    },
+    {
+      "id": "8",
+      "dateStart": "2023-12-24",
+      "dateEnd": "2023-12-25",
+      "description": "Christmas Celebration",
+      "outfit": [{
+        "id": null,
+        "name": null,
+        "label": null,
+        "season": null,
+        "type": null,
+        "size": null,
+        "favorite": false,
+        "linkImage":null,
+        "fit": null,
+        "color": null
+      }]
+    }
   ]
 }
