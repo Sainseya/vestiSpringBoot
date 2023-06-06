@@ -91,13 +91,15 @@ public class OutfitService {
         List<Object> outfits = new ArrayList<>();
 
         for (Wardrobe wardrobe: wardrobes) {
-            List<Item> bottoms = wardrobe.getItems();
-            List<Item> tops = wardrobe.getItems();
+            List<Item> items = wardrobe.getItems();
 
-            outfits.add(bottoms.stream()
-                    .map(e -> modelMapper.map(e, OutfitDTO.class)).toList().stream().findAny());
-            outfits.add(tops.stream()
-                    .map(e -> modelMapper.map(e, OutfitDTO.class))
+            outfits.add(items.stream().filter(e -> e.getType().equals("top"))
+                    .toList().stream().findAny());
+
+            outfits.add(items.stream().filter(e -> e.getType().equals("bottom"))
+                    .toList().stream().findAny());
+
+            outfits.add(items.stream().filter(e -> e.getType().equals("shoes"))
                     .toList().stream().findAny());
 
 

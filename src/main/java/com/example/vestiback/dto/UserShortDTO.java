@@ -6,7 +6,6 @@ import lombok.Getter;
 import java.util.List;
 @Data
 public class UserShortDTO {
-    private String id;
     private String name;
     private String surname;
     private String pseudo;

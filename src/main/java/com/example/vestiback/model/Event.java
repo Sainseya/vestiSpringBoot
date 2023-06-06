@@ -15,5 +15,5 @@ public class Event {
     private Date dateStart;
     private Date dateEnd;
     private String description;
-    private List<Item> outfit;
+    private List<Object> outfit;
 }
