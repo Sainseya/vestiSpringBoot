@@ -61,10 +61,10 @@ public class UserController {
         return outfitService.getBottoms(userId, wardrobeName);
     }
 
-/*    @GetMapping("{userId}/outfit") //Find outfit.
+    @GetMapping("{userId}/outfit") //Find outfit.
     public List<Object> getOutfit(@PathVariable String userId) throws Error {
         return outfitService.getOutfit(userId);
-    }*/
+    }
 
     @PostMapping("")
     public User save(@RequestBody User user){

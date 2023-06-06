@@ -1,5 +1,6 @@
 package com.example.vestiback.service;
 
+import com.example.vestiback.dto.OutfitDTO;
 import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
 import com.example.vestiback.model.Wardrobe;
@@ -8,6 +9,7 @@ import com.example.vestiback.service.Exception.Error;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,14 +85,14 @@ public class OutfitService {
      * @return une liste des tenues de l'utilisateurs généré aléatoirement.
      * @author Nseya Malumba
      */
-/*    public List<Object> getOutfit(String userId) throws Error{
+    public List<Object> getOutfit(String userId) throws Error{
         User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<User.Wardrobe> wardrobes = user.getWardrobes();
+        List<Wardrobe> wardrobes = user.getWardrobes();
         List<Object> outfits = new ArrayList<>();
 
-        for (User.Wardrobe wardrobe: wardrobes) {
-            List<Item> bottoms = wardrobe.getBottoms();
-            List<Item> tops = wardrobe.getTops();
+        for (Wardrobe wardrobe: wardrobes) {
+            List<Item> bottoms = wardrobe.getItems();
+            List<Item> tops = wardrobe.getItems();
 
             outfits.add(bottoms.stream()
                     .map(e -> modelMapper.map(e, OutfitDTO.class)).toList().stream().findAny());
@@ -98,11 +100,11 @@ public class OutfitService {
                     .map(e -> modelMapper.map(e, OutfitDTO.class))
                     .toList().stream().findAny());
 
-            List<User.Wardrobe> outfitList = outfits.stream().map(o -> modelMapper.map(o, User.Wardrobe.class)).toList();
-            return Collections.singletonList(outfitList);
+
+            return outfits ;
         }
         throw new Error("Outfit not found");
-    }*/
+    }
 
 
 
