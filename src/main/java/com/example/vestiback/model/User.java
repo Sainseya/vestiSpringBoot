@@ -18,5 +18,6 @@ public class User {
     private String gender;
     private String accountType;
     private List<Wardrobe> wardrobes;
+    private List<Outfit> outfit;
     private List<Event> events;
 }

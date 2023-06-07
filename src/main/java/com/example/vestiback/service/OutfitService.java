@@ -1,26 +1,23 @@
 package com.example.vestiback.service;
 
 import com.example.vestiback.dto.OutfitDTO;
-import com.example.vestiback.model.Item;
-import com.example.vestiback.model.User;
-import com.example.vestiback.model.Wardrobe;
+import com.example.vestiback.model.*;
 import com.example.vestiback.repository.UserRepository;
 import com.example.vestiback.service.Exception.Error;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class OutfitService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public OutfitService(UserRepository userRepository, ModelMapper modelMapper) {
+    public OutfitService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
     }
 
     public List<Item> getTops(String userId, String wardrobeName) throws Error {
@@ -93,21 +90,23 @@ public class OutfitService {
         for (Wardrobe wardrobe: wardrobes) {
             List<Item> items = wardrobe.getItems();
 
-            outfits.add(items.stream().filter(e -> e.getType().equals("top"))
-                    .toList().stream().findAny());
+            //Mélange les objects contenus les dressings
+            Collections.shuffle(items);
 
-            outfits.add(items.stream().filter(e -> e.getType().equals("bottom"))
-                    .toList().stream().findAny());
+            if (!items.isEmpty()){
 
-            outfits.add(items.stream().filter(e -> e.getType().equals("shoes"))
-                    .toList().stream().findAny());
+                outfits.add(items.stream().filter(e -> e.getType().equals("top")).findFirst().orElse(null));
 
+                outfits.add(items.stream().filter(e -> e.getType().equals("bottom")).findFirst().orElse(null));
 
-            return outfits ;
+                outfits.add(items.stream().filter(e -> e.getType().equals("shoes")).findFirst().orElse(null));
+
+                //Save user outfit.
+                userRepository.save(outfit);
+
+                return outfits;
+            }
         }
         throw new Error("Outfit not found");
     }
-
-
-
 }
