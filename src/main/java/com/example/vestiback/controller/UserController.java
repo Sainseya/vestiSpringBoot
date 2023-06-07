@@ -5,7 +5,6 @@ import com.example.vestiback.model.User;
 import com.example.vestiback.service.Exception.Error;
 import com.example.vestiback.service.OutfitService;
 import com.example.vestiback.service.UserService;
-import com.fasterxml.jackson.databind.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,7 +16,7 @@ public class UserController {
     private final UserService userService;
     private final OutfitService outfitService;
 
-    private UserController(UserService userService, ObjectMapper mapper, OutfitService outfitService){
+    private UserController(UserService userService, OutfitService outfitService){
         this.userService = userService;
         this.outfitService = outfitService;
     }
@@ -61,10 +60,10 @@ public class UserController {
         return outfitService.getBottoms(userId, wardrobeName);
     }
 
-    @GetMapping("{userId}/outfit") //Find outfit.
-    public List<Object> getOutfit(@PathVariable String userId) throws Error {
-        return outfitService.getOutfit(userId);
-    }
+//    @GetMapping("{userId}/outfit") //Find outfit.
+//    public List<Object> getOutfit(@PathVariable String userId) throws Error {
+//        return outfitService.getOutfit(userId);
+//    }
 
     @PostMapping("")
     public User save(@RequestBody User user){
@@ -74,6 +73,11 @@ public class UserController {
     @PutMapping("/{id}")
     public User update(@RequestBody User user, @PathVariable String id) throws Error {
         return userService.update(user,id);
+    }
+
+    @PutMapping("/{userId}/{eventId}")
+    public User updateOutfit(@PathVariable String userId,@PathVariable String eventId) throws Error {
+        return outfitService.createRandomOutfit(userId, eventId);
     }
 
     @DeleteMapping("/all")

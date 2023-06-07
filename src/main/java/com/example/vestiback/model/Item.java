@@ -6,11 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.net.URL;
 
-@Document("user")
+
 @Data
 public class Item {
         @Id
-        private String id;
+        private String itemId;
         private String name;
         private String label;
         private String season;

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class User {
     @Id
-    private String id;
+    private String userId;
     private String name;
     private String surname;
     private String pseudo;
@@ -18,6 +18,5 @@ public class User {
     private String gender;
     private String accountType;
     private List<Wardrobe> wardrobes;
-    private List<Outfit> outfit;
     private List<Event> events;
 }
