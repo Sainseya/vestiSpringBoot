@@ -11,75 +11,69 @@
       "items": [
         {
           "id": "1",
-          "name": "T-Shirt",
-          "label": null,
-          "season":"summer",
           "type": "top",
           "size": "XL",
-          "favorite": true,
-          "linkImage": null,
-          "fit": null,
-          "color": "blue"
+          "fit": "",
+          "season":"summer",
+          "color": "blue",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
         },
         {
           "id": "2",
-          "name": "Shorts",
-          "label": "",
-          "season":"summer",
           "type": "bottom",
           "size": "XXL",
-          "favorite": false,
-          "linkImage": null,
           "fit": "",
-          "color": "white"
+          "season":"summer",
+          "color": "white",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         },
         {
           "id": "3",
-          "name": "Sandals",
-          "label": "",
-          "season":"summer",
           "type": "shoes",
           "size": "45",
-          "favorite": false,
-          "linkImage": null ,
-          "fit": null,
-          "color": "brown"
+          "fit": "",
+          "season":"summer",
+          "color": "brown",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
         },
         {
           "id": "4",
-          "name": "My T-Shirt",
-          "label": null,
-          "season":"winter",
-          "type": "top",
+          "type": "bottom",
           "size": "L",
-          "favorite": true,
-          "linkImage": null,
-          "fit": null,
-          "color": "black"
+          "fit": "",
+          "season":"winter",
+          "color": "black",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
         },
         {
           "id": "5",
-          "name": "Shorts",
-          "label": "",
-          "season":"summer",
           "type": "bottom",
           "size": "M",
-          "favorite": false,
-          "linkImage": null,
           "fit": "",
-          "color": "white"
+          "season":"summer",
+          "color": "white",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         },
         {
           "id": "6",
-          "name": "Hermès",
-          "label": "",
-          "season":"summer",
           "type": "shoes",
           "size": "38",
-          "favorite": false,
-          "linkImage": null ,
-          "fit": null,
-          "color": "green"
+          "fit": "",
+          "season":"summer",
+          "color": "green",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         }
       ]
     }
@@ -92,15 +86,14 @@
       "description": "Summer Music Festival",
       "outfit": [{
         "id": null,
-        "name": null,
-        "label": null,
-        "season": null,
         "type": null,
         "size": null,
-        "favorite": false,
-        "linkImage":null,
         "fit": null,
-        "color": null
+        "season":null,
+        "color": null,
+        "isFavorite": null,
+        "label": null,
+        "picture": null
       }]
     },
     {
@@ -110,15 +103,14 @@
       "description": "Christmas Celebration",
       "outfit": [{
         "id": null,
-        "name": null,
-        "label": null,
-        "season": null,
         "type": null,
         "size": null,
-        "favorite": false,
-        "linkImage":null,
         "fit": null,
-        "color": null
+        "season":null,
+        "color": null,
+        "isFavorite": null,
+        "label": null,
+        "picture": null
       }]
     }
   ]
