@@ -11,14 +11,13 @@ import java.net.URL;
 public class Item {
         @Id
         private String itemId;
-        private String name;
-        private String label;
-        private String season;
         private String type;
-        private String color;
         private String size;
-        private boolean favorite;
-        private URL linkImage;
         private String fit;
+        private String season;
+        private String color;
+        private boolean isFavorite;
+        private String label;
+        private URL picture;
 
 }

@@ -83,6 +83,11 @@ public class UserService {
         return modelMapper.map(user, UserShortDTO.class);
     }
 
+    public User getUserById(String id)throws Error{
+        User user = userRepository.findById(id).orElseThrow(() -> new Error("User not found"));
+        return modelMapper.map(user, User.class);
+    }
+
 
     //Get the list of the user wardrobes
     public List<WardrobeDTO> getWardrobes(String userId)throws Error{

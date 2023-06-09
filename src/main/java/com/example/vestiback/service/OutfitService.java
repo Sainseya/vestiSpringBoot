@@ -1,6 +1,5 @@
 package com.example.vestiback.service;
 
-import com.example.vestiback.dto.OutfitDTO;
 import com.example.vestiback.model.*;
 import com.example.vestiback.repository.UserRepository;
 import com.example.vestiback.service.Exception.Error;
@@ -8,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -17,8 +15,12 @@ import java.util.stream.Collectors;
 public class OutfitService {
     private final UserRepository userRepository;
 
-    public OutfitService(UserRepository userRepository) {
+    private final UserService userService;
+
+    public OutfitService(UserRepository userRepository,
+                         UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public List<Item> getTops(String userId, String wardrobeName) throws Error {
@@ -87,5 +89,20 @@ public class OutfitService {
                 .orElseThrow(() -> new RuntimeException("Event not found"));
         event.setOutfit(updatedItems);
         return userRepository.save(user);
+    }
+
+
+    public List<Item> getOutfit(String userId, String eventId) throws Error {
+        User user = userService.getUserById(userId);
+        List<Item> outfit = new ArrayList<>();
+        for (Event event : user.getEvents()) {
+            if (event.getEventId().equals(eventId)){
+                outfit.addAll(event.getOutfit());
+            }
+        }if (outfit.isEmpty()) {
+            throw new Error("Vous n'avez pas de tenue enregistrée.");
+        } else {
+            return outfit;
+        }
     }
 }

@@ -60,10 +60,10 @@ public class UserController {
         return outfitService.getBottoms(userId, wardrobeName);
     }
 
-//    @GetMapping("{userId}/outfit") //Find outfit.
-//    public List<Object> getOutfit(@PathVariable String userId) throws Error {
-//        return outfitService.getOutfit(userId);
-//    }
+    @GetMapping("{userId}/{eventId}/outfit") //Find outfit.
+    public List<Item> getOutfit(@PathVariable String userId, @PathVariable String eventId) throws Error {
+        return outfitService.getOutfit(userId,eventId);
+    }
 
     @PostMapping("")
     public User save(@RequestBody User user){
