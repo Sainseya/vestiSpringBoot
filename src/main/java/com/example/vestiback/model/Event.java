@@ -13,12 +13,4 @@ public class Event {
     private Date dateEnd;
     private String description;
     private List<Item> outfit;
-
-    public void setOutfit(List<Item> outfit) {
-        this.outfit = outfit;
-    }
-
-    public List<Item> getOutfit() {
-        return this.outfit;
-    }
 }

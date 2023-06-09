@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("{userId}/{wardrobeName}")
-    public WardrobeDTO getDressingById(@PathVariable String userId, @PathVariable String wardrobeName) throws Error {
+    public WardrobeDTO getWardrobeByName(@PathVariable String userId, @PathVariable String wardrobeName) throws Error {
         return userService.getWardrobeByName(userId, wardrobeName);
     }
 
@@ -75,6 +75,12 @@ public class UserController {
     public User updateOutfit(@PathVariable String userId,@PathVariable String eventName) throws Error {
         return outfitService.createRandomOutfit(userId, eventName);
     }
+
+    @PutMapping("/{userId}/{wardrobeName}/newItem")
+    public User updateWardrobe(@PathVariable String userId,@PathVariable String wardrobeName,@RequestBody Item item) throws Error {
+        return userService.putItemInWardrobe(userId, wardrobeName, item);
+    }
+
 
     @DeleteMapping("/all")
     public ResponseEntity<String> deleteUserAll(){

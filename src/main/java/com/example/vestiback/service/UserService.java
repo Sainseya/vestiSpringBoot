@@ -2,6 +2,7 @@ package com.example.vestiback.service;
 
 import com.example.vestiback.dto.*;
 import com.example.vestiback.model.Event;
+import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
 import com.example.vestiback.model.Wardrobe;
 import com.example.vestiback.repository.UserRepository;
@@ -119,5 +120,19 @@ public class UserService {
         return  events.stream()
                 .map(e -> modelMapper.map(e,EventDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public User putItemInWardrobe(String userId, String wardrobeName, Item item) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        Wardrobe wardrobe = user.getWardrobes().stream()
+                .filter(e -> e.getName().equals(wardrobeName))
+                .findFirst()
+                .orElse(null);
+        if (wardrobe == null) {
+            wardrobe = new Wardrobe();
+            wardrobe.setName(wardrobeName);
+        }
+        wardrobe.getItems().add(item);
+        return userRepository.save(user);
     }
 }

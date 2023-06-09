@@ -13,5 +13,4 @@ public class Item {
         private boolean isFavorite;
         private String label;
         private URL picture;
-
 }
