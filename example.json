@@ -10,7 +10,6 @@
       "name": "Summer Wardrobe",
       "items": [
         {
-          "id": "1",
           "type": "top",
           "size": "XL",
           "fit": "",
@@ -21,7 +20,6 @@
           "picture": ""
         },
         {
-          "id": "2",
           "type": "bottom",
           "size": "XXL",
           "fit": "",
@@ -32,7 +30,6 @@
           "picture": ""
         },
         {
-          "id": "3",
           "type": "shoes",
           "size": "45",
           "fit": "",
@@ -43,7 +40,6 @@
           "picture": ""
         },
         {
-          "id": "4",
           "type": "bottom",
           "size": "L",
           "fit": "",
@@ -54,7 +50,6 @@
           "picture": ""
         },
         {
-          "id": "5",
           "type": "bottom",
           "size": "M",
           "fit": "",
@@ -65,9 +60,18 @@
           "picture": ""
         },
         {
-          "id": "6",
           "type": "shoes",
           "size": "38",
+          "fit": "",
+          "season":"summer",
+          "color": "green",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
+        },
+        {
+          "type": "accessory",
+          "size": "",
           "fit": "",
           "season":"summer",
           "color": "green",
@@ -80,7 +84,7 @@
   ],
   "events": [
     {
-      "id": "7",
+      "name": "Music",
       "dateStart": "2023-06-01",
       "dateEnd": "2023-06-03",
       "description": "Summer Music Festival",
@@ -97,7 +101,7 @@
       }]
     },
     {
-      "id": "8",
+      "name": "Christmas",
       "dateStart": "2023-12-24",
       "dateEnd": "2023-12-25",
       "description": "Christmas Celebration",
