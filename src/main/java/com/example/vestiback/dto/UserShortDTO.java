@@ -1,9 +1,6 @@
 package com.example.vestiback.dto;
 
 import lombok.Data;
-import lombok.Getter;
-
-import java.util.List;
 @Data
 public class UserShortDTO {
     private String name;

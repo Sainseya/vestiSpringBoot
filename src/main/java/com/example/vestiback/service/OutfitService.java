@@ -3,13 +3,11 @@ package com.example.vestiback.service;
 import com.example.vestiback.model.*;
 import com.example.vestiback.repository.UserRepository;
 import com.example.vestiback.service.Exception.Error;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class OutfitService {
@@ -21,34 +19,6 @@ public class OutfitService {
                          UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
-    }
-
-    public List<Item> getTops(String userId, String wardrobeName) throws Error {
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<Wardrobe> wardrobes = user.getWardrobes();
-
-        for (Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getName().equals(wardrobeName)) {
-                List<Item> tops = wardrobe.getItems();
-                return tops.stream().filter(e -> e.getType().equals("top"))
-                        .collect(Collectors.toList());
-            }
-        }
-        throw new Error("Tops not found");
-    }
-
-    public List<Item> getBottoms(String userId, String wardrobeName) throws Error{
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<Wardrobe> wardrobes = user.getWardrobes();
-
-        for (Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getName().equals(wardrobeName)) {
-                List<Item> bottoms = wardrobe.getItems();
-                return bottoms.stream().filter(e -> e.getType().equals("bottom"))
-                        .collect(Collectors.toList());
-            }
-        }
-        throw new Error("Bottoms not found");
     }
 
     public List<Item> findItemsByUserIdAndType(String userId, String itemType) throws Error {
@@ -71,22 +41,29 @@ public class OutfitService {
     }
 
     public User createRandomOutfit(String userId, String eventId) throws Error {
+        userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         List<Item> tops = findItemsByUserIdAndType(userId, "top");
         List<Item> bottoms = findItemsByUserIdAndType(userId, "bottom");
+        List<Item> shoes = findItemsByUserIdAndType(userId, "shoes");
+        List<Item> accessories = findItemsByUserIdAndType(userId, "accessory");
         Item randomTop = tops.get(new Random().nextInt(tops.size()));
         Item randomBottom = bottoms.get(new Random().nextInt(bottoms.size()));
+        Item randomShoes = shoes.get(new Random().nextInt(shoes.size()));
+        Item randomAccessory = accessories.get(new Random().nextInt(accessories.size()));
         List<Item> randomOutfit = new ArrayList<Item>();
         randomOutfit.add(randomTop);
         randomOutfit.add(randomBottom);
+        randomOutfit.add(randomShoes);
+        randomOutfit.add(randomAccessory);
         return updateEventItems(userId,eventId,randomOutfit);
     }
 
-    public User updateEventItems(String userId, String eventId, List<Item> updatedItems) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    public User updateEventItems(String userId, String eventName, List<Item> updatedItems) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         Event event = user.getEvents().stream()
-                .filter(e -> e.getEventId().equals(eventId))
+                .filter(e -> e.getName().equals(eventName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new Error("Event not found"));
         event.setOutfit(updatedItems);
         return userRepository.save(user);
     }
@@ -96,7 +73,7 @@ public class OutfitService {
         User user = userService.getUserById(userId);
         List<Item> outfit = new ArrayList<>();
         for (Event event : user.getEvents()) {
-            if (event.getEventId().equals(eventId)){
+            if (event.getName().equals(eventId)){
                 outfit.addAll(event.getOutfit());
             }
         }if (outfit.isEmpty()) {

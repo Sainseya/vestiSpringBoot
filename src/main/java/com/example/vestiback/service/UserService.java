@@ -54,8 +54,8 @@ public class UserService {
 
 
     //Update all user
-    public User update(User user, String id)throws Error {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new Error("User not found"));
+    public User update(User user, String userId)throws Error {
+        User existingUser = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
             existingUser.setName(user.getName());
             existingUser.setSurname(user.getSurname());
             existingUser.setPseudo(user.getPseudo());
@@ -71,20 +71,20 @@ public class UserService {
     /**DTO Configuration**/
 
     //Get full information about a user
-    public UserFullDTO getUserFUllById(String id)throws Error{
-        User user = userRepository.findById(id).orElseThrow(() -> new Error("User not found"));
+    public UserFullDTO getUserFUllById(String userId)throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         return modelMapper.map(user, UserFullDTO.class);
     }
 
 
     //Get short information about a user
-    public UserShortDTO getUserShortById(String id)throws Error{
-        User user = userRepository.findById(id).orElseThrow(() -> new Error("User not found"));
+    public UserShortDTO getUserShortById(String userId)throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         return modelMapper.map(user, UserShortDTO.class);
     }
 
-    public User getUserById(String id)throws Error{
-        User user = userRepository.findById(id).orElseThrow(() -> new Error("User not found"));
+    public User getUserById(String userId) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         return modelMapper.map(user, User.class);
     }
 
@@ -100,11 +100,11 @@ public class UserService {
 
 
     //Get all elements contain in user wardrobe by his name
-    public WardrobeDTO getWardrobeByName(String userId, String wardrobeId)throws Error{
+    public WardrobeDTO getWardrobeByName(String userId, String wardrobeName)throws Error{
         User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         List<Wardrobe> wardrobes = user.getWardrobes();
         for ( Wardrobe wardrobe: wardrobes) {
-            if (wardrobe.getName().equals(wardrobeId)){
+            if (wardrobe.getName().equals(wardrobeName)){
                 return modelMapper.map(wardrobe, WardrobeDTO.class);
             }
         }
