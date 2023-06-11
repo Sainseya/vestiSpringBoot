@@ -1,109 +1,85 @@
 package com.example.vestiback.service;
 
-import com.example.vestiback.model.Item;
-import com.example.vestiback.model.User;
-import com.example.vestiback.model.Wardrobe;
+import com.example.vestiback.model.*;
 import com.example.vestiback.repository.UserRepository;
 import com.example.vestiback.service.Exception.Error;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 @Service
 public class OutfitService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public OutfitService(UserRepository userRepository, ModelMapper modelMapper) {
+    private final UserService userService;
+
+    public OutfitService(UserRepository userRepository,
+                         UserService userService) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
-    public List<Item> getTops(String userId, String wardrobeName) throws Error {
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<Wardrobe> wardrobes = user.getWardrobes();
-
-        for (Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getName().equals(wardrobeName)) {
-                List<Item> tops = wardrobe.getItems();
-                return tops.stream().filter(e -> e.getType().equals("top"))
-                        .collect(Collectors.toList());
+    public List<Item> findItemsByUserIdAndType(String userId, String itemType) throws Error {
+        List<User> users = userRepository.findUsersByUserIdAndItemType(userId, itemType);
+        List<Item> items = new ArrayList<>();
+        for (User user : users) {
+            for (Wardrobe wardrobe : user.getWardrobes()) {
+                for (Item item : wardrobe.getItems()) {
+                    if (item.getType().equals(itemType)) {
+                        items.add(item);
+                    }
+                }
             }
         }
-        throw new Error("Tops not found");
+        if (items.isEmpty()) {
+            throw new Error("Vous n'avez pas de dressing ou de d'articles dans votre dressing.");
+        } else {
+            return items;
+        }
     }
 
-    public List<Item> getBottoms(String userId, String wardrobeName) throws Error{
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<Wardrobe> wardrobes = user.getWardrobes();
+    public User createRandomOutfit(String userId, String eventId) throws Error {
+        userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        List<Item> tops = findItemsByUserIdAndType(userId, "top");
+        List<Item> bottoms = findItemsByUserIdAndType(userId, "bottom");
+        List<Item> shoes = findItemsByUserIdAndType(userId, "shoes");
+        List<Item> accessories = findItemsByUserIdAndType(userId, "accessory");
+        Item randomTop = tops.get(new Random().nextInt(tops.size()));
+        Item randomBottom = bottoms.get(new Random().nextInt(bottoms.size()));
+        Item randomShoes = shoes.get(new Random().nextInt(shoes.size()));
+        Item randomAccessory = accessories.get(new Random().nextInt(accessories.size()));
+        List<Item> randomOutfit = new ArrayList<Item>();
+        randomOutfit.add(randomTop);
+        randomOutfit.add(randomBottom);
+        randomOutfit.add(randomShoes);
+        randomOutfit.add(randomAccessory);
+        return updateEventItems(userId,eventId,randomOutfit);
+    }
 
-        for (Wardrobe wardrobe : wardrobes) {
-            if (wardrobe.getName().equals(wardrobeName)) {
-                List<Item> bottoms = wardrobe.getItems();
-                return bottoms.stream().filter(e -> e.getType().equals("bottom"))
-                        .collect(Collectors.toList());
+    public User updateEventItems(String userId, String eventName, List<Item> updatedItems) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        Event event = user.getEvents().stream()
+                .filter(e -> e.getName().equals(eventName))
+                .findFirst()
+                .orElseThrow(() -> new Error("Event not found"));
+        event.setOutfit(updatedItems);
+        return userRepository.save(user);
+    }
+
+
+    public List<Item> getOutfit(String userId, String eventId) throws Error {
+        User user = userService.getUserById(userId);
+        List<Item> outfit = new ArrayList<>();
+        for (Event event : user.getEvents()) {
+            if (event.getName().equals(eventId)){
+                outfit.addAll(event.getOutfit());
             }
+        }if (outfit.isEmpty()) {
+            throw new Error("Vous n'avez pas de tenue enregistrée.");
+        } else {
+            return outfit;
         }
-        throw new Error("Bottoms not found");
     }
-
-    /*
-      <p>
-      * La méthode getOutfit prend en paramètre userId, l'ID de l'utilisateur, et retourne une liste d'objets représentant les tenues de l'utilisateur.
-      *
-      * La méthode commence par récupérer l'utilisateur correspondant à l'ID fourni en utilisant le UserRepository.
-      Si l'utilisateur n'est pas trouvé, une exception Error est levée avec le message "User not found".
-      *
-      * Ensuite, la méthode récupère la liste des garde-robes (wardrobes) de l'utilisateur.
-      *
-      * Un nouvel ArrayList appelé outfits est créé pour stocker les tenues.
-      *
-      * La méthode parcourt chaque garde-robe dans la liste des garde-robes de l'utilisateur en utilisant une boucle for-each.
-      *
-      * À l'intérieur de la boucle, les bas (bottoms) et les hauts (tops) de chaque garde-robe sont récupérés à l'aide des méthodes getBottoms() et getTops() respectivement.
-      *
-      * Pour chaque liste de bas et de hauts, un Stream est créé à l'aide de la méthode stream().
-      *
-      * Ensuite, la méthode map() est utilisée pour mapper chaque élément de la liste d'objets d'origine à un objet OutfitDTO à l'aide de modelMapper.map().
-      Cela permet de convertir les objets de type User.Wardrobe.Bottom et User.Wardrobe.Top en objets de type OutfitDTO.
-      *
-      * La méthode toList() est appelée pour convertir le Stream en une liste d'objets OutfitDTO.
-      *
-      * Enfin, la méthode findAny() est utilisée pour obtenir un élément de la liste résultante.
-      Cet élément est ajouté à la liste des tenues (outfits) à l'aide de la méthode add().
-      *
-      * Une fois que toutes les garde-robes ont été traitées, la méthode retourne la liste des tenues (outfits).
-      *
-      * Si aucune tenue n'est trouvée (c'est-à-dire si la liste des garde-robes est vide), une exception
-      <p/>
-
-      @param userId : String
-     * @return une liste des tenues de l'utilisateurs généré aléatoirement.
-     * @author Nseya Malumba
-     */
-/*    public List<Object> getOutfit(String userId) throws Error{
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<User.Wardrobe> wardrobes = user.getWardrobes();
-        List<Object> outfits = new ArrayList<>();
-
-        for (User.Wardrobe wardrobe: wardrobes) {
-            List<Item> bottoms = wardrobe.getBottoms();
-            List<Item> tops = wardrobe.getTops();
-
-            outfits.add(bottoms.stream()
-                    .map(e -> modelMapper.map(e, OutfitDTO.class)).toList().stream().findAny());
-            outfits.add(tops.stream()
-                    .map(e -> modelMapper.map(e, OutfitDTO.class))
-                    .toList().stream().findAny());
-
-            List<User.Wardrobe> outfitList = outfits.stream().map(o -> modelMapper.map(o, User.Wardrobe.class)).toList();
-            return Collections.singletonList(outfitList);
-        }
-        throw new Error("Outfit not found");
-    }*/
-
-
-
 }

@@ -10,115 +10,111 @@
       "name": "Summer Wardrobe",
       "items": [
         {
-          "id": "1",
-          "name": "T-Shirt",
-          "label": null,
-          "season":"summer",
           "type": "top",
           "size": "XL",
-          "favorite": true,
-          "linkImage": null,
-          "fit": null,
-          "color": "blue"
+          "fit": "",
+          "season":"summer",
+          "color": "blue",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
         },
         {
-          "id": "2",
-          "name": "Shorts",
-          "label": "",
-          "season":"summer",
           "type": "bottom",
           "size": "XXL",
-          "favorite": false,
-          "linkImage": null,
           "fit": "",
-          "color": "white"
+          "season":"summer",
+          "color": "white",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         },
         {
-          "id": "3",
-          "name": "Sandals",
-          "label": "",
-          "season":"summer",
           "type": "shoes",
           "size": "45",
-          "favorite": false,
-          "linkImage": null ,
-          "fit": null,
-          "color": "brown"
-        },
-        {
-          "id": "4",
-          "name": "My T-Shirt",
-          "label": null,
-          "season":"winter",
-          "type": "top",
-          "size": "L",
-          "favorite": true,
-          "linkImage": null,
-          "fit": null,
-          "color": "black"
-        },
-        {
-          "id": "5",
-          "name": "Shorts",
-          "label": "",
+          "fit": "",
           "season":"summer",
+          "color": "brown",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
+        },
+        {
+          "type": "bottom",
+          "size": "L",
+          "fit": "",
+          "season":"winter",
+          "color": "black",
+          "isFavorite": true,
+          "label": "",
+          "picture": ""
+        },
+        {
           "type": "bottom",
           "size": "M",
-          "favorite": false,
-          "linkImage": null,
           "fit": "",
-          "color": "white"
+          "season":"summer",
+          "color": "white",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         },
         {
-          "id": "6",
-          "name": "Hermès",
-          "label": "",
-          "season":"summer",
           "type": "shoes",
           "size": "38",
-          "favorite": false,
-          "linkImage": null ,
-          "fit": null,
-          "color": "green"
+          "fit": "",
+          "season":"summer",
+          "color": "green",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
+        },
+        {
+          "type": "accessory",
+          "size": "",
+          "fit": "",
+          "season":"summer",
+          "color": "green",
+          "isFavorite": false,
+          "label": "",
+          "picture": ""
         }
       ]
     }
   ],
   "events": [
     {
-      "id": "7",
+      "name": "Music",
       "dateStart": "2023-06-01",
       "dateEnd": "2023-06-03",
       "description": "Summer Music Festival",
       "outfit": [{
         "id": null,
-        "name": null,
-        "label": null,
-        "season": null,
         "type": null,
         "size": null,
-        "favorite": false,
-        "linkImage":null,
         "fit": null,
-        "color": null
+        "season":null,
+        "color": null,
+        "isFavorite": null,
+        "label": null,
+        "picture": null
       }]
     },
     {
-      "id": "8",
+      "name": "Christmas",
       "dateStart": "2023-12-24",
       "dateEnd": "2023-12-25",
       "description": "Christmas Celebration",
       "outfit": [{
         "id": null,
-        "name": null,
-        "label": null,
-        "season": null,
         "type": null,
         "size": null,
-        "favorite": false,
-        "linkImage":null,
         "fit": null,
-        "color": null
+        "season":null,
+        "color": null,
+        "isFavorite": null,
+        "label": null,
+        "picture": null
       }]
     }
   ]
