@@ -2,6 +2,7 @@ package com.example.vestiback.service;
 
 import com.example.vestiback.dto.*;
 import com.example.vestiback.model.Event;
+import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
 import com.example.vestiback.model.Wardrobe;
 import com.example.vestiback.repository.UserRepository;
@@ -9,6 +10,7 @@ import com.example.vestiback.service.Exception.Error;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,11 +115,50 @@ public class UserService {
 
 
     //Get the list of the user event
-    public List<EventDTO> getEvent(String userId)throws Error{
+    public List<EventDTO> getEvents(String userId)throws Error{
         User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         List<Event> events = user.getEvents();
         return  events.stream()
                 .map(e -> modelMapper.map(e,EventDTO.class))
                 .collect(Collectors.toList());
     }
+
+    public List<Event> getOutfitHistory(String userId)throws Error {
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        List<Event> outfitHistory = user.getOutfitHistory();
+        if (user.getOutfitHistory() == null) {
+            user.setOutfitHistory(new ArrayList<Event>());}
+        if (user.getOutfitHistory() == null){ throw new Error("OutfitHistory is null");}
+        assert outfitHistory != null; // a revoir ensemble
+        return outfitHistory.stream()
+                    .map(e -> modelMapper.map(e, Event.class))
+                    .collect(Collectors.toList());
+        }
+
+
+    public User putItemInWardrobe(String userId, String wardrobeName, Item item) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        Wardrobe wardrobe = user.getWardrobes().stream()
+                .filter(e -> e.getName().equals(wardrobeName))
+                .findFirst()
+                .orElse(null);
+        if (wardrobe == null) {
+            wardrobe = new Wardrobe();
+            wardrobe.setName(wardrobeName);
+        }
+        wardrobe.getItems().add(item);
+        return userRepository.save(user);
+    }
+
+    public User putOutfitInOutfitHistory(User user, Event event) throws Error{
+        if (user.getOutfitHistory() == null) {
+            List<Event> outfitHistory = new ArrayList<>();
+            outfitHistory.add(event);
+            user.setOutfitHistory(outfitHistory);
+        } else {
+            user.getOutfitHistory().add(event);
+        }
+        return userRepository.save(user);
+    }
+
 }

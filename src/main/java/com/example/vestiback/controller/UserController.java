@@ -1,5 +1,6 @@
 package com.example.vestiback.controller;
 import com.example.vestiback.dto.*;
+import com.example.vestiback.model.Event;
 import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
 import com.example.vestiback.service.Exception.Error;
@@ -42,13 +43,13 @@ public class UserController {
     }
 
     @GetMapping("{userId}/{wardrobeName}")
-    public WardrobeDTO getDressingById(@PathVariable String userId, @PathVariable String wardrobeName) throws Error {
+    public WardrobeDTO getWardrobeByName(@PathVariable String userId, @PathVariable String wardrobeName) throws Error {
         return userService.getWardrobeByName(userId, wardrobeName);
     }
 
     @GetMapping("/{userId}/events")
     public List<EventDTO> getEvent(@PathVariable String userId) throws Error {
-        return userService.getEvent(userId);
+        return userService.getEvents(userId);
     }
 
     @GetMapping("{userId}/wardrobe/{type}") //Find all user tops.
@@ -60,6 +61,12 @@ public class UserController {
     public List<Item> getOutfit(@PathVariable String userId, @PathVariable String eventName) throws Error {
         return outfitService.getOutfit(userId,eventName);
     }
+
+    @GetMapping("{userId}/outfitHistory") //Find outfitHistory.
+    public List<Event> getOutfitHistory(@PathVariable String userId) throws Error {
+        return userService.getOutfitHistory(userId);
+    }
+
 
     @PostMapping("")
     public User save(@RequestBody User user){
@@ -75,6 +82,12 @@ public class UserController {
     public User updateOutfit(@PathVariable String userId,@PathVariable String eventName) throws Error {
         return outfitService.createRandomOutfit(userId, eventName);
     }
+
+    @PutMapping("/{userId}/{wardrobeName}/newItem")
+    public User updateWardrobe(@PathVariable String userId,@PathVariable String wardrobeName,@RequestBody Item item) throws Error {
+        return userService.putItemInWardrobe(userId, wardrobeName, item);
+    }
+
 
     @DeleteMapping("/all")
     public ResponseEntity<String> deleteUserAll(){

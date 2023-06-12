@@ -14,4 +14,5 @@ public class UserFullDTO {
     private String accountType;
     private List<WardrobeDTO> wardrobes;
     private List<EventDTO> events;
+    private List<EventDTO> outfitHistory;
 }
