@@ -105,17 +105,39 @@
       "dateStart": "2023-12-24",
       "dateEnd": "2023-12-25",
       "description": "Christmas Celebration",
-      "outfit": [{
-        "id": null,
-        "type": null,
-        "size": null,
-        "fit": null,
-        "season":null,
-        "color": null,
-        "isFavorite": null,
-        "label": null,
-        "picture": null
-      }]
+      "outfit": [
+        {
+          "id": null,
+          "type": null,
+          "size": null,
+          "fit": null,
+          "season": null,
+          "color": null,
+          "isFavorite": null,
+          "label": null,
+          "picture": null
+        }
+      ]
+    },
+    {"outfitHistory": [{
+      "name": null,
+      "dateStart": null,
+      "dateEnd": null,
+      "description": null,
+      "outfit": [
+        {
+          "id": null,
+          "type": null,
+          "size": null,
+          "fit": null,
+          "season": null,
+          "color": null,
+          "isFavorite": null,
+          "label": null,
+          "picture": null
+        }
+      ]
+    }]
     }
   ]
 }

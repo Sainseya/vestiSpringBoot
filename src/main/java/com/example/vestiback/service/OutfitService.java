@@ -22,17 +22,16 @@ public class OutfitService {
     }
 
     public List<Item> findItemsByUserIdAndType(String userId, String itemType) throws Error {
-        List<User> users = userRepository.findUsersByUserIdAndItemType(userId, itemType);
+        User user = userRepository.findUsersByUserIdAndItemType(userId, itemType);
         List<Item> items = new ArrayList<>();
-        for (User user : users) {
-            for (Wardrobe wardrobe : user.getWardrobes()) {
+        for (Wardrobe wardrobe : user.getWardrobes()) {
                 for (Item item : wardrobe.getItems()) {
                     if (item.getType().equals(itemType)) {
                         items.add(item);
                     }
                 }
             }
-        }
+
         if (items.isEmpty()) {
             throw new Error("Vous n'avez pas de dressing ou de d'articles dans votre dressing.");
         } else {
@@ -58,22 +57,24 @@ public class OutfitService {
         return updateEventItems(userId,eventId,randomOutfit);
     }
 
-    public User updateEventItems(String userId, String eventName, List<Item> updatedItems) throws Error{
+    public User updateEventItems(String userId, String eventName, List<Item> randomOutfit) throws Error{
         User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
         Event event = user.getEvents().stream()
                 .filter(e -> e.getName().equals(eventName))
                 .findFirst()
                 .orElseThrow(() -> new Error("Event not found"));
-        event.setOutfit(updatedItems);
+        event.setOutfit(randomOutfit);
+        userService.putOutfitInOutfitHistory(user,event);
+
         return userRepository.save(user);
     }
 
 
-    public List<Item> getOutfit(String userId, String eventId) throws Error {
+    public List<Item> getOutfit(String userId, String eventName) throws Error {
         User user = userService.getUserById(userId);
         List<Item> outfit = new ArrayList<>();
         for (Event event : user.getEvents()) {
-            if (event.getName().equals(eventId)){
+            if (event.getName().equals(eventName)){
                 outfit.addAll(event.getOutfit());
             }
         }if (outfit.isEmpty()) {

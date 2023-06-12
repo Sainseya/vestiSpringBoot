@@ -1,5 +1,6 @@
 package com.example.vestiback.controller;
 import com.example.vestiback.dto.*;
+import com.example.vestiback.model.Event;
 import com.example.vestiback.model.Item;
 import com.example.vestiback.model.User;
 import com.example.vestiback.service.Exception.Error;
@@ -48,7 +49,7 @@ public class UserController {
 
     @GetMapping("/{userId}/events")
     public List<EventDTO> getEvent(@PathVariable String userId) throws Error {
-        return userService.getEvent(userId);
+        return userService.getEvents(userId);
     }
 
     @GetMapping("{userId}/wardrobe/{type}") //Find all user tops.
@@ -60,6 +61,12 @@ public class UserController {
     public List<Item> getOutfit(@PathVariable String userId, @PathVariable String eventName) throws Error {
         return outfitService.getOutfit(userId,eventName);
     }
+
+    @GetMapping("{userId}/outfitHistory") //Find outfitHistory.
+    public List<Event> getOutfitHistory(@PathVariable String userId) throws Error {
+        return userService.getOutfitHistory(userId);
+    }
+
 
     @PostMapping("")
     public User save(@RequestBody User user){
