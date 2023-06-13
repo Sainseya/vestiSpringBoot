@@ -3,7 +3,7 @@
 Vesti : est un dressing connecté qui vous permet d'organiser vos tenues et d'avoir des idées en fonction de vos propres goûts, préférences, en fonction de la saison, de la météo et plus encore ..."
 
 ## Lien des consignes :
-+ https://github.com/Mi-chat/vesti/blob/fix-outfit-otd/CONSIGNE.md
++ [https://github.com/Sainseya/vestiSpringBoot/blob/main/CONSIGNES.md]
 
 ## Langages utilisés ?
 + Java SpringBoot
