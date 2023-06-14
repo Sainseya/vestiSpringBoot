@@ -14,7 +14,7 @@ https://github.com/Sainseya/vestiSpringBoot
 
 ## Then : 
 
-  run the `VestiBackApplication.java` (the main class) use the link to the back-end repository.
+  run the `VestiBackApplication.java` (the main class).
 
 	
 
