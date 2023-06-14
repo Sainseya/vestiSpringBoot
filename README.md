@@ -13,11 +13,11 @@ https://github.com/Sainseya/vestiSpringBoot
 
 ## Then : 
 
-  run the VestiBackApplication.java (the main class) use the link to the back-end repository.
+  run the `VestiBackApplication.java` (the main class) use the link to the back-end repository.
 
 	
 
-+ port : http://localhost:8080/
++ port : `http://localhost:8080/`
 + This project was generated with SpringBoot version 3.1.0 
 + It is connected to a MongoDB container on the port 27017:27017
 
@@ -28,7 +28,7 @@ https://github.com/Sainseya/vestiSpringBoot
 + Mongo DB
 
 ## Lien vers le Front-end : 
-+ (https://github.com/Mi-chat/vesti)
++ `https://github.com/Mi-chat/vesti`
 
 ## Contributeurs :
 + https://github.com/Mi-chat
