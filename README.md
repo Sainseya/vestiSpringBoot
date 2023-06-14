@@ -1,9 +1,27 @@
-## BIENVENUE SUR LE BACK-END DE VESTI  :
+## WELCOME ON THE BACK-END REPOSITORY OF VESTI  :
 
-Vesti : est un dressing connecté qui vous permet d'organiser vos tenues et d'avoir des idées en fonction de vos propres goûts, préférences, en fonction de la saison, de la météo et plus encore ..."
+Vesti: is a connected wardrobe that allows you to organize your outfits and have ideas according to your own tastes, preferences, according to the season, the weather and more ..."
 
-## Lien des consignes :
-+ [https://github.com/Sainseya/vestiSpringBoot/blob/main/CONSIGNES.md]
+## To Run This Project : 
+
+## First : 
+
+Back-end Repositories : 
+
++ Back-end : 
+https://github.com/Sainseya/vestiSpringBoot
+
+## Then : 
+
+  run the VestiBackApplication.java (the main class) use the link to the back-end repository.
+
+	
+
++ port : http://localhost:8080/
++ This project was generated with SpringBoot version 3.1.0 
++ It is connect to a MongoDB to the port 27017:27017
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Langages utilisés ?
 + Java SpringBoot
