@@ -7,7 +7,7 @@ Vesti : is a connected wardrobe that allows you to organize your outfits and hav
 
 ## First : 
 
-Back-end Repositories : 
+Clone the back-end repository : 
 
 + Back-end : 
 https://github.com/Sainseya/vestiSpringBoot
