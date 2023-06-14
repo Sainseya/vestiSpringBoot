@@ -19,7 +19,7 @@ https://github.com/Sainseya/vestiSpringBoot
 
 + port : http://localhost:8080/
 + This project was generated with SpringBoot version 3.1.0 
-+ It is connect to a MongoDB to the port 27017:27017
++ It is connected to a MongoDB container on the port 27017:27017
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
