@@ -58,7 +58,7 @@ public class UserService {
         User existingUser = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
             existingUser.setName(user.getName());
             existingUser.setSurname(user.getSurname());
-            existingUser.setPseudo(user.getPseudo());
+            existingUser.setUsername(user.getUsername());
             existingUser.setEmail(user.getEmail());
             existingUser.setGender(user.getGender());
             existingUser.setAccountType(user.getAccountType());
