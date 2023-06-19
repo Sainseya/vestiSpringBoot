@@ -33,7 +33,6 @@ public class User {
     private List<Event> events;
     private Set<Role> roles = new HashSet<>();
 
-    public User(){}
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;

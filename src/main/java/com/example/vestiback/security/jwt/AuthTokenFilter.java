@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 public class AuthTokenFilter extends OncePerRequestFilter {
 
-    private final JwtUtils jwtUtils;
+    private  JwtUtils jwtUtils;
 
     private final UserDetailsServiceImpl userDetailsService;
 
@@ -57,7 +57,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         String headerAuth = request.getHeader("Authorization");
 
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
+            return headerAuth.substring(7,headerAuth.length());
         }
 
         return null;

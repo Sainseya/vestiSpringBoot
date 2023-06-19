@@ -23,13 +23,13 @@ public class UserService {
     }
 
     //Find all users
-    public List<User> findAll()throws Error {
+    public List<UserShortDTO> findAll()throws Error {
 
         if (userRepository.findAll().isEmpty()){
             throw new Error("The table is empty");
         }
         else {
-            return userRepository.findAll();
+            return userRepository.findAll().stream().map(e -> modelMapper.map(e, UserShortDTO.class)).collect(Collectors.toList());
         }
     }
 
@@ -110,7 +110,6 @@ public class UserService {
         }
         throw new Error("Wardrobe not found");
     }
-
 
     //Get the list of the user event
     public List<EventDTO> getEvent(String userId)throws Error{
