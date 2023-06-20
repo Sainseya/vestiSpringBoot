@@ -58,9 +58,6 @@ public class UserService {
     //Update all user
     public User update(User user, String userId)throws Error {
         User existingUser = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-            existingUser.setName(user.getName());
-            existingUser.setSurname(user.getSurname());
-            existingUser.setPseudo(user.getPseudo());
             existingUser.setEmail(user.getEmail());
             existingUser.setGender(user.getGender());
             existingUser.setAccountType(user.getAccountType());
@@ -73,15 +70,15 @@ public class UserService {
     /**DTO Configuration**/
 
     //Get full information about a user
-    public UserFullDTO getUserFUllById(String userId)throws Error{
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+    public UserFullDTO getUserFUllById(String userId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return modelMapper.map(user, UserFullDTO.class);
     }
 
 
     //Get short information about a user
-    public UserShortDTO getUserShortById(String userId)throws Error{
-        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+    public UserShortDTO getUserShortById(String userId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return modelMapper.map(user, UserShortDTO.class);
     }
 
@@ -161,4 +158,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User putNewWardrobe (String userId, Wardrobe wardrobe) throws Error{
+        User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
+        Wardrobe newWardrobe = new Wardrobe();
+       newWardrobe.setName(wardrobe.getName());
+       newWardrobe.setItems(wardrobe.getItems());
+       user.getWardrobes().add(newWardrobe);
+       return userRepository.save(user);
+    }
 }

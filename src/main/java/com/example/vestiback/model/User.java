@@ -10,9 +10,7 @@ import java.util.List;
 public class User {
     @Id
     private String userId;
-    private String name;
-    private String surname;
-    private String pseudo;
+    private String username;
     private String email;
     private String gender;
     private String accountType;

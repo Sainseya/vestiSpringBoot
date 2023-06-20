@@ -41,10 +41,10 @@ public class OutfitService {
 
     public User createRandomOutfit(String userId, String eventId) throws Error {
         userRepository.findById(userId).orElseThrow(() -> new Error("User not found"));
-        List<Item> tops = findItemsByUserIdAndType(userId, "top");
-        List<Item> bottoms = findItemsByUserIdAndType(userId, "bottom");
-        List<Item> shoes = findItemsByUserIdAndType(userId, "shoes");
-        List<Item> accessories = findItemsByUserIdAndType(userId, "accessory");
+        List<Item> tops = findItemsByUserIdAndType(userId, "haut");
+        List<Item> bottoms = findItemsByUserIdAndType(userId, "bas");
+        List<Item> shoes = findItemsByUserIdAndType(userId, "chaussures");
+        List<Item> accessories = findItemsByUserIdAndType(userId, "accessoire");
         Item randomTop = tops.get(new Random().nextInt(tops.size()));
         Item randomBottom = bottoms.get(new Random().nextInt(bottoms.size()));
         Item randomShoes = shoes.get(new Random().nextInt(shoes.size()));
