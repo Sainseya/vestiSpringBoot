@@ -76,7 +76,8 @@ public class AuthController {
     }
 
 /*    @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser(@Valid @RequestBody )*/
+    public ResponseEntity<?> logoutUser(@Valid @RequestBody )
+*/
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
