@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * Cette classe est utilisée dans la gestion des erreurs d'authentification.
+ * Lorsqu'une exception d'authentification se produit, elle enregistre un message d'erreur et renvoie une
+ * réponse HTTP avec le code d'erreur 401 et un message d'erreur approprié.
+ * */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
