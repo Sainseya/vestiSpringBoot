@@ -29,7 +29,7 @@ https://github.com/Sainseya/vestiSpringBoot
 + Mongo DB
 
 ## Lien vers le Front-end : 
-+ https://github.com/Mi-chat/vesti
++ https://github.com/Sainseya/vestiFront
 
 ## Contributeurs :
 + https://github.com/Mi-chat
